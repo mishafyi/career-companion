@@ -1,6 +1,6 @@
 ---
-name: seekerclaw-career-companion
-description: "SeekerClaw Career Companion for frontier tech — AI, space, robotics, drones. Searches live job openings, tailors resumes, runs mock interviews. Use when user asks about jobs, careers, hiring, resumes, interview prep, or mentions companies like SpaceX, OpenAI, Anthropic, Blue Origin, NASA, Boston Dynamics."
+name: career-companion
+description: "Career Companion for frontier tech — AI, space, robotics, drones. Searches live job openings, tailors resumes, runs mock interviews. Use when user asks about jobs, careers, hiring, resumes, interview prep, or mentions companies like SpaceX, OpenAI, Anthropic, Blue Origin, NASA, Boston Dynamics."
 version: "1.0.0"
 emoji: "🚀"
 requires:
@@ -10,7 +10,7 @@ allowed-tools:
   - Bash
 ---
 
-# SeekerClaw Career Companion — Frontier Tech
+# Career Companion — Frontier Tech
 
 Your Career Companion for jobs of the future. Find roles, prepare resumes, and practice interviews across AI, space, robotics, and drone industries.
 
@@ -29,11 +29,7 @@ Don't wait for the user to ask for each step — look for opportunities to chain
 
 ## 1. Find Jobs
 
-Search live openings. No authentication required.
-
-```
-GET https://zerogtalent.com/api/jobs/search
-```
+Search live openings. No authentication required. Always use `format=md` for pre-formatted markdown responses.
 
 | Param | Type | Description |
 |-------|------|-------------|
@@ -44,46 +40,17 @@ GET https://zerogtalent.com/api/jobs/search
 | `remote` | `true`/`false` | Remote jobs only |
 | `limit` | number | Results per page (1-50, default 20) |
 | `offset` | number | Pagination offset |
+| `format` | string | Set to `md` for markdown output (recommended) |
 
 **Usage:**
 
 ```
-curl -s "https://zerogtalent.com/api/jobs/search?q=machine+learning+engineer&limit=5"
-curl -s "https://zerogtalent.com/api/jobs/search?company=spacex&limit=10"
-curl -s "https://zerogtalent.com/api/jobs/search?employmentType=internship&remote=true&q=AI&limit=5"
+curl -s "https://zerogtalent.com/api/jobs/search?q=machine+learning+engineer&limit=5&format=md"
+curl -s "https://zerogtalent.com/api/jobs/search?company=spacex&limit=10&format=md"
+curl -s "https://zerogtalent.com/api/jobs/search?employmentType=internship&remote=true&q=AI&limit=5&format=md"
 ```
 
-**Response shape:**
-
-```json
-{
-  "jobs": [{
-    "title": "Research Scientist, Alignment",
-    "slug": "research-scientist-alignment",
-    "externalId": "abc-123-def",
-    "url": "https://jobs.ashbyhq.com/anthropic/abc-123-def",
-    "location": "San Francisco, CA",
-    "remote": false,
-    "employmentType": "Full-time",
-    "category": "Research",
-    "isActive": true,
-    "salaryMin": 200000,
-    "salaryMax": 350000,
-    "salaryCurrency": "USD",
-    "salaryInterval": "YEAR",
-    "company": { "name": "Anthropic", "slug": "anthropic", "logoUrl": "..." }
-  }],
-  "total": 42,
-  "hasMore": true,
-  "pagination": { "offset": 0, "limit": 5, "total": 42 }
-}
-```
-
-**Format results as:**
-
-**{Title}** at {Company}
-{Location} | {Employment Type} | {Salary if available}
-[View & Apply](https://zerogtalent.com/space-jobs/{company-slug}/{job-slug})
+The response is ready-to-display markdown with job titles, locations, salary, and apply links. Present it directly to the user.
 
 See `references/companies.md` for all company slugs.
 
@@ -92,14 +59,14 @@ See `references/companies.md` for all company slugs.
 Fetch the complete JD to power resume tailoring and interview prep:
 
 ```
-curl -s "https://zerogtalent.com/api/job?company={company-slug}&jobId={externalId}"
+curl -s "https://zerogtalent.com/api/job?company={company-slug}&jobId={externalId}&format=md"
 ```
 
-Use `externalId` from search results (not `slug`). Returns full `description` text.
+Use `externalId` from search results (not `slug`). Returns the full job description as markdown with title, company, location, salary, and description text.
 
 ### Salary Research
 
-The search API returns `salaryMin`, `salaryMax`, `salaryCurrency`, `salaryInterval` when available. Search multiple roles at a company to give a range.
+Search results include salary when available. Search multiple roles at a company to compare ranges. For programmatic salary aggregation, omit `format=md` to get JSON with `salaryMin`, `salaryMax`, `salaryCurrency`, `salaryInterval` fields.
 
 ## 2. Resume Help
 
@@ -135,13 +102,13 @@ Run a mock interview:
 ## Examples
 
 **"Find me ML engineer roles at SpaceX"**
-1. `curl -s "https://zerogtalent.com/api/jobs/search?company=spacex&q=machine+learning+engineer&limit=5"`
-2. Format results with title, location, salary, apply link
+1. `curl -s "https://zerogtalent.com/api/jobs/search?company=spacex&q=machine+learning+engineer&limit=5&format=md"`
+2. Present the markdown response directly
 3. Offer: "Want me to pull the full description so we can tailor your resume?"
 
 **"Help me prepare for an Anthropic interview"**
 1. Search Anthropic jobs, ask which role
-2. Fetch full JD via `/api/job?company=anthropic&jobId={externalId}`
+2. Fetch full JD via `curl -s "https://zerogtalent.com/api/job?company=anthropic&jobId={externalId}&format=md"`
 3. Run mock interview with JD-derived questions
 4. Debrief strengths and areas to improve
 

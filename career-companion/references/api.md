@@ -19,8 +19,28 @@ GET https://zerogtalent.com/api/jobs/search
 | `remote` | string | — | `true` for remote-only jobs |
 | `limit` | number | 20 | Results per page (max 50) |
 | `offset` | number | 0 | Pagination offset |
+| `format` | string | — | Set to `md` for markdown output (recommended for agents) |
 
-### Response
+### Markdown Response (`format=md`)
+
+Returns pre-formatted markdown — present directly to users:
+
+```
+**Machine Learning Engineer** at Waymo
+Mountain View, California, United States | Full Time | $170,000–$216,000/year
+[View & Apply](https://zerogtalent.com/space-jobs/waymo/machine-learning-engineer-7455853)
+
+**Research Scientist, Alignment** at Anthropic
+San Francisco, CA | Full-time | $200,000–$350,000/year
+[View & Apply](https://zerogtalent.com/space-jobs/anthropic/research-scientist-alignment)
+
+Page 1/5 | 42 results
+Next: offset=20
+```
+
+### JSON Response (default)
+
+Without `format=md`, returns JSON with full job objects. Useful for programmatic salary aggregation.
 
 ```json
 {
@@ -29,7 +49,6 @@ GET https://zerogtalent.com/api/jobs/search
       "title": "Research Scientist, Alignment",
       "slug": "research-scientist-alignment",
       "externalId": "abc-123-def",
-      "url": "https://jobs.ashbyhq.com/anthropic/abc-123-def",
       "location": "San Francisco, CA",
       "remote": false,
       "employmentType": "Full-time",
@@ -52,24 +71,15 @@ GET https://zerogtalent.com/api/jobs/search
 }
 ```
 
-### Salary Fields
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `salaryMin` | number \| null | Minimum salary |
-| `salaryMax` | number \| null | Maximum salary |
-| `salaryCurrency` | string \| null | Currency code (usually `USD`) |
-| `salaryInterval` | string \| null | `YEAR`, `MONTH`, or `HOUR` |
-
-Not all jobs include salary data. When null, suggest external sources (Levels.fyi, Glassdoor).
-
 ## Get Job Description
 
 ```
-GET https://zerogtalent.com/api/job?company={company-slug}&jobId={externalId}
+GET https://zerogtalent.com/api/job?company={company-slug}&jobId={externalId}&format=md
 ```
 
-Returns the complete job object including the full `description` field (HTML/text).
+Returns the complete job as markdown with title, company, location, salary, full description text, and links to related roles at the same company.
+
+Without `format=md`, returns the full JSON job object including the HTML `description` field.
 
 **Important:** Use `externalId` from search results, never the `slug`. The `slug` is for URL display only.
 

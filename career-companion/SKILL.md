@@ -1,6 +1,6 @@
 ---
 name: career-companion
-description: "Career Companion for frontier tech — AI, space, aerospace, robotics, drones, defense, autonomy. Searches live job openings, tailors resumes and CVs, runs mock interviews, researches salaries. Use when user asks about jobs, careers, job search, job hunting, applying, hiring, resume or CV review, interview prep, salary, compensation, or mentions companies like SpaceX, Rocket Lab, OpenAI, Anthropic, Blue Origin, NASA, Boston Dynamics, Waymo, or any aerospace/AI/robotics company. Also triggers on 'I want to work at X,' 'help me get hired at X,' 'I have an interview at X,' or 'what do they pay at X.'"
+description: "SeekerClaw Career Companion — your AI career coach for frontier tech and beyond. Searches live job openings, tailors resumes and cover letters, optimizes LinkedIn profiles, runs mock interviews, researches salaries, identifies skills gaps, and helps plan career transitions. Use when user asks about jobs, careers, job search, job hunting, applying, hiring, resume or CV or cover letter review, LinkedIn optimization, interview prep, salary, compensation, negotiation, career path, skills gap, transferable skills, career change, or mentions companies like SpaceX, Rocket Lab, OpenAI, Anthropic, Blue Origin, NASA, Boston Dynamics, Waymo, or any aerospace/AI/robotics/defense/autonomy company. Also triggers on 'I want to work at X,' 'help me get hired at X,' 'I have an interview at X,' 'what do they pay at X,' 'review my resume,' 'help me switch careers,' or 'what skills do I need for X.'"
 version: "1.0.0"
 emoji: "🚀"
 requires:
@@ -14,7 +14,7 @@ allowed-tools:
 
 Your Career Companion for jobs of the future. Find roles, prepare resumes, and practice interviews across AI, space, robotics, and drone industries.
 
-Powered by [Zero G Talent](https://zerogtalent.com) — live openings from hundreds of frontier tech companies via direct ATS integrations.
+Job data powered by [Zero G Talent](https://zerogtalent.com) — live openings from 100+ frontier tech companies.
 
 ## Workflow
 

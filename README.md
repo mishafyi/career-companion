@@ -1,38 +1,61 @@
-# Career Companion
+# SeekerClaw Career Companion
 
-AI agent skill for job search, resume tailoring, and interview prep across frontier tech — space, AI, robotics, drones, defense, and autonomy.
+Your AI career coach — find jobs, build standout resumes, practice interviews, and plan your next move.
 
-Powered by [Zero G Talent](https://zerogtalent.com) — live openings from 100+ companies via direct ATS integrations. No API key required.
+SeekerClaw Career Companion helps you navigate every stage of the job search: from exploring career paths and identifying skills gaps, to tailoring application materials, preparing for interviews, and negotiating offers. Built for AI agents — works in Claude Code, Telegram, Slack, and any chat interface.
 
 ## What It Does
 
-**Find jobs** — Search live openings by keyword, company, location, or employment type. Results include salary ranges, direct apply links, and pagination.
+### Find Jobs
+
+Search live openings by keyword, company, location, or employment type. Results include salary ranges and direct apply links.
 
 ```
 "Find me ML engineer roles at SpaceX"
 "Remote AI internships"
 "What propulsion engineer jobs does Blue Origin have?"
+"Show me robotics jobs in California"
 ```
 
-**Tailor resumes** — Fetches the full job description, extracts requirements and tech stack, then rewrites bullet points to mirror the JD language. Knows what SpaceX vs. NASA vs. Anthropic actually look for.
+### Resumes, Cover Letters & LinkedIn
+
+Review and tailor application materials for specific roles. Fetches the actual job description, extracts requirements, and rewrites your bullets to mirror the JD language.
 
 ```
 "Here's my resume — tailor it for this Anthropic role"
 "Review my CV for robotics jobs"
+"Help me write a cover letter for this position"
+"What should I highlight on my LinkedIn for AI roles?"
 ```
 
-**Mock interviews** — Company-specific questions derived from the actual job description. Behavioral (STAR), technical, and culture-fit formats. Honest feedback after each answer, debrief at the end.
+### Interview Prep
+
+Company-specific mock interviews derived from real job descriptions. Behavioral (STAR), technical, and culture-fit formats. Honest feedback after each answer, full debrief at the end.
 
 ```
-"I have a phone screen at Blue Origin next week, help me prep"
+"I have a phone screen at Blue Origin next week"
 "Run a mock interview for this OpenAI research scientist role"
+"What questions should I expect at NASA?"
 ```
 
-**Salary research** — Aggregates salary data across search results. When salary fields are null, says so honestly.
+### Salary & Negotiation
+
+Research compensation ranges across roles and companies. Get role-specific talking points for salary negotiations.
 
 ```
 "How much do AI safety researchers make?"
 "What's the pay range for senior engineers at Rocket Lab?"
+"Help me negotiate this offer"
+```
+
+### Career Planning
+
+Explore career paths, identify transferable skills, find adjacent roles, and plan transitions.
+
+```
+"I'm a mechanical engineer — what space jobs could I transition to?"
+"What skills do I need to break into robotics?"
+"Help me figure out which Anthropic role fits my background"
 ```
 
 ## Example Output
@@ -53,7 +76,7 @@ $145K–$203K/yr · Apply → zerogtalent.com/space-jobs/blue-origin/...
 Showing 10 of 346 results
 ```
 
-Mobile-friendly — designed for Telegram, Slack, and chat interfaces where long messages get truncated.
+Designed for mobile — scannable in Telegram, Slack, and chat where long messages get truncated.
 
 ## Install
 
@@ -80,7 +103,7 @@ Full list with API slugs: [`references/companies.md`](career-companion/reference
 
 ## API
 
-Public JSON API — no auth required.
+Public JSON API — no auth required. Job data from [Zero G Talent](https://zerogtalent.com).
 
 | Endpoint | Purpose |
 |----------|---------|
@@ -89,7 +112,7 @@ Public JSON API — no auth required.
 
 Params: `q`, `company`, `location`, `employmentType`, `remote`, `limit` (default 10, max 50), `offset`.
 
-Full schema and response examples: [`references/api.md`](career-companion/references/api.md)
+Full schema: [`references/api.md`](career-companion/references/api.md)
 
 ## Skill Structure
 

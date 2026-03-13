@@ -1,60 +1,105 @@
-# SeekerClaw Career Companion
+# Career Companion
 
-Your AI Career Companion for frontier tech — AI, space, robotics, and drones.
+AI agent skill for job search, resume tailoring, and interview prep across frontier tech — space, AI, robotics, drones, defense, and autonomy.
 
-A [SeekerClaw](https://seekerclaw.com) skill that searches live job openings, helps tailor resumes for specific roles, and runs mock interviews.
-
-Powered by [Zero G Talent](https://zerogtalent.com) — a job board aggregating live openings from hundreds of frontier tech companies via direct ATS integrations.
-
-> **Looking for the Claude Code version?** Install via ClawHub: `clawhub install career-companion`
+Powered by [Zero G Talent](https://zerogtalent.com) — live openings from 100+ companies via direct ATS integrations. No API key required.
 
 ## What It Does
 
-| Capability | Description |
-|-----------|-------------|
-| **Find Jobs** | Search live openings at SpaceX, OpenAI, Anthropic, NASA, Boston Dynamics, and 100+ more companies |
-| **Resume Help** | Review, critique, and tailor resumes for frontier tech roles using actual job description language |
-| **Interview Prep** | Mock interviews with company-specific questions, STAR method coaching, and honest feedback |
-| **Salary Research** | Aggregate salary data across roles and companies |
+**Find jobs** — Search live openings by keyword, company, location, or employment type. Results include salary ranges, direct apply links, and pagination.
+
+```
+"Find me ML engineer roles at SpaceX"
+"Remote AI internships"
+"What propulsion engineer jobs does Blue Origin have?"
+```
+
+**Tailor resumes** — Fetches the full job description, extracts requirements and tech stack, then rewrites bullet points to mirror the JD language. Knows what SpaceX vs. NASA vs. Anthropic actually look for.
+
+```
+"Here's my resume — tailor it for this Anthropic role"
+"Review my CV for robotics jobs"
+```
+
+**Mock interviews** — Company-specific questions derived from the actual job description. Behavioral (STAR), technical, and culture-fit formats. Honest feedback after each answer, debrief at the end.
+
+```
+"I have a phone screen at Blue Origin next week, help me prep"
+"Run a mock interview for this OpenAI research scientist role"
+```
+
+**Salary research** — Aggregates salary data across search results. When salary fields are null, says so honestly.
+
+```
+"How much do AI safety researchers make?"
+"What's the pay range for senior engineers at Rocket Lab?"
+```
+
+## Example Output
+
+```
+**1. Sr. Main Engine Propulsion Engineer - Lunar Permanence**
+Blue Origin · Greater Seattle Area; Los Angeles, CA; Denver, CO
+$145K–$203K/yr · Apply → zerogtalent.com/space-jobs/blue-origin/...
+
+**2. Principal Propulsion Engineer - BE-3U Upgrades**
+Blue Origin · Greater Seattle Area; Huntsville, AL
+$169K–$237K/yr · Apply → zerogtalent.com/space-jobs/blue-origin/...
+
+**3. Senior Propulsion Test Engineer**
+Blue Origin · Lancaster, CA
+$145K–$203K/yr · Apply → zerogtalent.com/space-jobs/blue-origin/...
+
+Showing 10 of 346 results
+```
+
+Mobile-friendly — designed for Telegram, Slack, and chat interfaces where long messages get truncated.
 
 ## Install
 
-### SeekerClaw
+### Claude Code
+
 ```bash
-seekerclaw install career-companion
+clawhub install career-companion
 ```
 
 ### Manual
-Copy the `career-companion/` folder into your agent's `skills/` directory.
 
-## Usage
-
-Just ask naturally:
-
-- "Find me ML engineer roles at SpaceX"
-- "Help me prepare for an Anthropic interview"
-- "Review my resume for robotics jobs"
-- "How much do AI safety researchers make?"
-- "What remote AI internships are available?"
-
-The skill chains capabilities automatically — searching jobs, fetching descriptions, tailoring resumes, and running interviews in sequence.
+Copy the `career-companion/` folder into your agent's skills directory.
 
 ## Companies Covered
 
-**Space:** SpaceX, NASA, Blue Origin, Rocket Lab, Boeing, Northrop Grumman, Lockheed Martin, Relativity Space, ULA, L3Harris, Astranis, Planet
+| Sector | Companies |
+|--------|-----------|
+| **Space** | SpaceX, NASA, Blue Origin, Rocket Lab, Boeing, Northrop Grumman, Lockheed Martin, Relativity Space, ULA, L3Harris, Astranis, Planet |
+| **AI** | OpenAI, Anthropic, DeepMind, xAI, Cohere, Scale AI, Together AI, Perplexity, Databricks, Cursor |
+| **Robotics** | Boston Dynamics, Waymo, Neuralink, Aurora Innovation, IonQ, Rigetti, Helion Energy |
+| **Drones & Defense** | Skydio, Anduril, Shield AI, Zipline |
 
-**AI:** OpenAI, Anthropic, DeepMind, xAI, Cohere, Scale AI, Together AI, Perplexity, Databricks, Cursor
-
-**Robotics:** Boston Dynamics, Waymo, Neuralink, Aurora Innovation, IonQ, Rigetti, Helion Energy
-
-**Drones:** Skydio, Anduril, Shield AI, Zipline
+Full list with API slugs: [`references/companies.md`](career-companion/references/companies.md)
 
 ## API
 
-Uses the public [Zero G Talent API](https://zerogtalent.com) — no authentication required.
+Public JSON API — no auth required.
 
-- `GET /api/jobs/search` — Search jobs by keyword, company, location, type
-- `GET /api/job?company={slug}&jobId={id}` — Full job description
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /api/jobs/search?q=...&company=...&limit=10` | Search jobs |
+| `GET /api/job?company={slug}&jobId={externalId}` | Full job description |
+
+Params: `q`, `company`, `location`, `employmentType`, `remote`, `limit` (default 10, max 50), `offset`.
+
+Full schema and response examples: [`references/api.md`](career-companion/references/api.md)
+
+## Skill Structure
+
+```
+career-companion/
+  SKILL.md              # Agent instructions — workflow, output rules, domain knowledge
+  references/
+    api.md              # API endpoints, parameters, response schema
+    companies.md        # Company slugs for the company= filter
+```
 
 ## License
 

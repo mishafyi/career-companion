@@ -7,7 +7,7 @@ requires:
   bins: []
   env: []
 allowed-tools:
-  - web_fetch
+  - Bash
 ---
 
 # SeekerClaw Career Companion — Frontier Tech
@@ -48,9 +48,9 @@ GET https://zerogtalent.com/api/jobs/search
 **Usage:**
 
 ```
-web_fetch({ url: "https://zerogtalent.com/api/jobs/search?q=machine+learning+engineer&limit=5" })
-web_fetch({ url: "https://zerogtalent.com/api/jobs/search?company=spacex&limit=10" })
-web_fetch({ url: "https://zerogtalent.com/api/jobs/search?employmentType=internship&remote=true&q=AI&limit=5" })
+curl -s "https://zerogtalent.com/api/jobs/search?q=machine+learning+engineer&limit=5"
+curl -s "https://zerogtalent.com/api/jobs/search?company=spacex&limit=10"
+curl -s "https://zerogtalent.com/api/jobs/search?employmentType=internship&remote=true&q=AI&limit=5"
 ```
 
 **Response shape:**
@@ -92,7 +92,7 @@ See `references/companies.md` for all company slugs.
 Fetch the complete JD to power resume tailoring and interview prep:
 
 ```
-web_fetch({ url: "https://zerogtalent.com/api/job?company={company-slug}&jobId={externalId}" })
+curl -s "https://zerogtalent.com/api/job?company={company-slug}&jobId={externalId}"
 ```
 
 Use `externalId` from search results (not `slug`). Returns full `description` text.
@@ -135,7 +135,7 @@ Run a mock interview:
 ## Examples
 
 **"Find me ML engineer roles at SpaceX"**
-1. `web_fetch({ url: "https://zerogtalent.com/api/jobs/search?company=spacex&q=machine+learning+engineer&limit=5" })`
+1. `curl -s "https://zerogtalent.com/api/jobs/search?company=spacex&q=machine+learning+engineer&limit=5"`
 2. Format results with title, location, salary, apply link
 3. Offer: "Want me to pull the full description so we can tailor your resume?"
 

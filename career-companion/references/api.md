@@ -13,34 +13,14 @@ GET https://zerogtalent.com/api/jobs/search
 | Param | Type | Default | Description |
 |-------|------|---------|-------------|
 | `q` | string | — | Full-text + fuzzy keyword search |
-| `company` | string | — | Company slug filter |
+| `company` | string | — | Company slug filter (see `references/companies.md`) |
 | `location` | string | — | Location slug (e.g., `california`, `remote`, `texas`, `new-york`) |
 | `employmentType` | string | — | `full-time`, `internship`, `part-time`, `contract` |
 | `remote` | string | — | `true` for remote-only jobs |
-| `limit` | number | 20 | Results per page (max 50) |
+| `limit` | number | 10 | Results per page (max 50) |
 | `offset` | number | 0 | Pagination offset |
-| `format` | string | — | Set to `md` for markdown output (recommended for agents) |
 
-### Markdown Response (`format=md`)
-
-Returns pre-formatted markdown — present directly to users:
-
-```
-**Machine Learning Engineer** at Waymo
-Mountain View, California, United States | Full Time | $170,000–$216,000/year
-[View & Apply](https://zerogtalent.com/space-jobs/waymo/machine-learning-engineer-7455853)
-
-**Research Scientist, Alignment** at Anthropic
-San Francisco, CA | Full-time | $200,000–$350,000/year
-[View & Apply](https://zerogtalent.com/space-jobs/anthropic/research-scientist-alignment)
-
-Page 1/5 | 42 results
-Next: offset=20
-```
-
-### JSON Response (default)
-
-Without `format=md`, returns JSON with full job objects. Useful for programmatic salary aggregation.
+### JSON Response
 
 ```json
 {
@@ -67,28 +47,18 @@ Without `format=md`, returns JSON with full job objects. Useful for programmatic
   ],
   "total": 42,
   "hasMore": true,
-  "pagination": { "offset": 0, "limit": 20, "total": 42 }
+  "pagination": { "offset": 0, "limit": 10, "total": 42 }
 }
 ```
+
+Salary fields (`salaryMin`, `salaryMax`, `salaryCurrency`, `salaryInterval`) are null when not available. For salary research, search multiple roles at a company to compare ranges.
 
 ## Get Job Description
 
 ```
-GET https://zerogtalent.com/api/job?company={company-slug}&jobId={externalId}&format=md
+GET https://zerogtalent.com/api/job?company={company-slug}&jobId={externalId}
 ```
 
-Returns the complete job as markdown with title, company, location, salary, full description text, and links to related roles at the same company.
+Returns a `job` object with title, company, location, salary, and an HTML `description` field.
 
-Without `format=md`, returns the full JSON job object including the HTML `description` field.
-
-**Important:** Use `externalId` from search results, never the `slug`. The `slug` is for URL display only.
-
-## Job Detail Page URLs
-
-Link to the Zero G Talent job page (not the direct ATS URL) for a better experience:
-
-```
-https://zerogtalent.com/space-jobs/{company-slug}/{job-slug}
-```
-
-Both `company-slug` (from `company.slug`) and `job-slug` (from `slug`) come from the search response.
+**Important:** Use `externalId` from search results, never `slug`. The `slug` is for URL display only.

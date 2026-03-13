@@ -1,6 +1,6 @@
 ---
-name: career-companion
-description: "Career Companion for frontier tech — AI, space, robotics, drones. Searches live job openings, tailors resumes, runs mock interviews. Use when user asks about jobs, careers, hiring, resumes, interview prep, or mentions companies like SpaceX, OpenAI, Anthropic, Blue Origin, NASA, Boston Dynamics."
+name: seekerclaw-career-companion
+description: "SeekerClaw Career Companion for frontier tech — AI, space, robotics, drones. Searches live job openings, tailors resumes, runs mock interviews. Use when user asks about jobs, careers, hiring, resumes, interview prep, or mentions companies like SpaceX, OpenAI, Anthropic, Blue Origin, NASA, Boston Dynamics."
 version: "1.0.0"
 emoji: "🚀"
 requires:
@@ -8,11 +8,9 @@ requires:
   env: []
 allowed-tools:
   - web_fetch
-  - WebFetch
-  - mcp__fetch__fetch
 ---
 
-# Career Companion — Frontier Tech
+# SeekerClaw Career Companion — Frontier Tech
 
 Your Career Companion for jobs of the future. Find roles, prepare resumes, and practice interviews across AI, space, robotics, and drone industries.
 

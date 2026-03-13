@@ -1,10 +1,12 @@
-# Career Companion
+# SeekerClaw Career Companion
 
 Your AI Career Companion for frontier tech — AI, space, robotics, and drones.
 
-A skill for AI coding agents ([SeekerClaw](https://seekerclaw.com), [Claude Code](https://claude.ai/claude-code), [OpenClaw](https://openclaw.com)) that searches live job openings, helps tailor resumes for specific roles, and runs mock interviews.
+A [SeekerClaw](https://seekerclaw.com) skill that searches live job openings, helps tailor resumes for specific roles, and runs mock interviews.
 
 Powered by [Zero G Talent](https://zerogtalent.com) — a job board aggregating live openings from hundreds of frontier tech companies via direct ATS integrations.
+
+> **Looking for the Claude Code version?** Install via ClawHub: `clawhub install career-companion`
 
 ## What It Does
 
@@ -20,11 +22,6 @@ Powered by [Zero G Talent](https://zerogtalent.com) — a job board aggregating 
 ### SeekerClaw
 ```bash
 seekerclaw install career-companion
-```
-
-### Claude Code (ClawHub)
-```bash
-clawhub install career-companion
 ```
 
 ### Manual
